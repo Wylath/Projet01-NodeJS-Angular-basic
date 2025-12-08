@@ -1,0 +1,10 @@
+ul {
+  background: rgb(0, 49, 0);
+  /*display:flex;*/
+}
+ul li {
+  color: white;
+  margin: 5px;
+  width: 50px;
+  padding: 10px;
+}/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+/* 
+Tuto de base : https://www.youtube.com/watch?v=VSicGRFRMu0
+Fichier de base du projet angulair, plus utiliser avec l'ajout de sass et du fichier style.css, 
+remplacer dans angular.json par le nouveau style.scss 
+Il suffit maintenant de mettre le style dans style.scss il sera automatiquement mis à jour dans style.css
+*/
+/* Au besoin pour utiliser sass comme préprocesseur principal, 
+changer : src/app/app.css → src/app/app.scss 
+et ensuite dans composant : 
+@Component({
+  ...
+  styleUrls: ['./app.scss']
+})
+/*

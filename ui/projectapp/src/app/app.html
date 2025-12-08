@@ -1,0 +1,42 @@
+<h2>Liste des projets</h2>
+
+<form (ngSubmit)="onSubmit()" #projectForm="ngForm">
+  <label>ID : </label>
+  <input type="text" name="id" [(ngModel)]="newProject.id" required>
+  <br>
+  <label>Description : </label>
+  <input type="text" name="desc" [(ngModel)]="newProject.desc" required>
+  <br>
+  <button type="submit" [disabled]="projectForm.invalid">Ajouter</button>
+</form>
+
+<!-- Message de confirmation -->
+<div *ngIf="confirmation" class="confirmation">
+  {{ confirmation }}
+</div>
+
+<hr>
+
+<!-- pour debug -->
+<!--<pre>{{ loading }} - {{ error }} - {{ items.length }}</pre>-->
+
+<!-- Affiché tant que la requête est en cours -->
+<div *ngIf="loading">
+  Chargement en cours...
+</div>
+<!-- Message si la liste est vide -->
+<div *ngIf="!loading && items.length === 0">Aucun projet trouvé</div>
+
+<!-- Affiché en cas d’erreur -->
+<div *ngIf="error && !loading" style="color:red;">
+  Impossible de récupérer les données.
+</div>
+
+<!-- Affichage de la liste seulement si items n'est pas vide -->
+<ul *ngIf="!loading && !error">
+  <li *ngFor="let item of items">
+    <strong>ID interne:</strong> {{ item._id }} <br>
+    <strong>ID:</strong> {{ item.id }} <br>
+    <strong>Description:</strong> {{ item.desc }}
+  </li>
+</ul>

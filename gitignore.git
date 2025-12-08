@@ -1,0 +1,48 @@
+# =========================
+# Node.js / API
+# =========================
+api/node_modules/
+api/dist/
+api/build/
+api/.env
+api/npm-debug.log*
+api/yarn-debug.log*
+api/yarn-error.log*
+
+# Logs
+api/*.log
+api/logs/
+
+# =========================
+# Angular / UI
+# =========================
+ui/projectapp/node_modules/
+ui/projectapp/dist/
+ui/projectapp/.angular/
+ui/projectapp/*.log
+ui/projectapp/.vscode/
+ui/projectapp/.cache/
+ui/projectapp/.sass-cache/
+ui/projectapp/.DS_Store
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# =========================
+# OS / System
+# =========================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# =========================
+# Optional: lockfiles if you don't want to version them
+# package-lock.json
+# yarn.lock

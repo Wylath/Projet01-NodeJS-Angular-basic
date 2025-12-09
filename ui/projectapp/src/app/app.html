@@ -7,70 +7,94 @@
   - Bloc de gestion des projets : formulaire d'ajout + liste des projets
   - Messages d'erreur, de confirmation et loader
 -->
-<div class="app-content">
-  <div class="auth-box" *ngIf="showLogin()">
-    <!-- login -->
-    <h2>Connexion</h2>
-    <form #loginForm="ngForm" (ngSubmit)="login()">
-       <input type="text" placeholder="Email" [(ngModel)]="loginEmail" name="email" required>
-       <input type="password" placeholder="Mot de passe" [(ngModel)]="loginPassword" name="password" required>
-       <button type="submit">Se connecter</button>
-     </form>
-  <hr>
-   <h2>Créer un compte</h2>
-   <form #registerForm="ngForm" (ngSubmit)="register()">
-     <input type="text" placeholder="Username" [(ngModel)]="newUser.username" name="username" required>
-     <input type="email" placeholder="Email" [(ngModel)]="newUser.email" name="email" required>
-     <input type="password" placeholder="Mot de passe" [(ngModel)]="newUser.password" name="password" required>
-     <button type="submit">S'enregistrer</button>
-   </form>
-    <!-- Message de confirmation inscription -->
-    <div *ngIf="confirmation" class="confirmation-register">
-      {{ confirmation }}
+<div class="app-login-container">
+  <div class="left-panel">
+    <img src="assets/Logo-Coophub.png" alt="Logo" class="logo">
+    <h2>Accès à votre espace CoopHub</h2>
+    <p>Votre compte sociétaire est accessible sur la plateforme sécurisée de souscription demo.coophub.eu. Vous accédez
+      à l'ensemble de vos informations et préférences : coordonées, transactions, certificats, etc. Et pouvez mettre à
+      jour vos informations personnelles.</p>
+    <div class="image-container">
+      <img src="assets/wind.png" alt="Illustration" class="wind">
+      <img src="assets/cloud.png" alt="Illustration" class="cloud">
     </div>
   </div>
-  <br>
-  <div class="app-box" *ngIf="showApp()">
-    <h3>Bienvenue {{ currentUser }}</h3>
-    <button class="logout" (click)="logout()">Se déconnecter</button>
-  </div>
-  <div *ngIf="showApp()">
-    <!-- contenu appli + projets -->
-    <h2>Liste des projets</h2>
-    <form (ngSubmit)="onSubmit()" #projectForm="ngForm">
-      <label>ID : </label>
-      <input type="text" name="id" [(ngModel)]="newProject.id" required>
-      <br>
-      <label>Description : </label>
-      <input type="text" name="desc" [(ngModel)]="newProject.desc" required>
-      <br>
-      <button type="submit" [disabled]="projectForm.invalid">Ajouter</button>
-    </form>
-    <!-- Message de confirmation -->
-    <div *ngIf="confirmation" class="confirmation">
-      {{ confirmation }}
-    </div>
-    <hr>
-    <!-- pour debug -->
-    <!--<pre>{{ loading }} - {{ error }} - {{ items.length }}</pre>-->
-    <!-- Affiché tant que la requête est en cours -->
-    <div *ngIf="loading">
-      Chargement en cours...
-    </div>
-    <!-- Message si la liste est vide -->
-    <div *ngIf="!loading && items.length === 0">Aucun projet trouvé</div>
+  <div class="right-panel">
+    <div class="center-content">
+      <div class="auth-box" *ngIf="showLogin()">
+        <h2>Accès à votre espace</h2>
+        <p>
+          Pas encore de compte ?
+          <a href="#" (click)="toggleRegisterForm()">S'enregistrer</a>
+        </p>
+        <!-- LOGIN -->
+        <form (ngSubmit)="login()">
+          <p><b>Adresse email ou nom d'utilisateur</b></p>
+          <input type="text" placeholder="Email ou nom d'utilisateur" [(ngModel)]="loginIdentifier" name="identifier" required>
+          <p><b>Mot de passe</b></p>
+          <input type="password" placeholder="Mot de passe" [(ngModel)]="loginPassword" name="password" required>
+          <button type="submit">ME CONNECTER</button>
+          <a href="#">Vous avez oublié votre nom d’utilisateur ?</a>
+        </form>
+      </div>
+      <!-- REGISTER -->
+      <div *ngIf="showRegister()">
+        <h2>Créer un compte</h2>
+        <form #registerForm="ngForm" (ngSubmit)="register()">
+          <input type="text" placeholder="Username" [(ngModel)]="newUser.username" name="username" required>
+          <input type="email" placeholder="Email" [(ngModel)]="newUser.email" name="email" required>
+          <input type="password" placeholder="Mot de passe" [(ngModel)]="newUser.password" name="password" required>
+          <button type="submit">S'enregistrer</button>
+        </form>
+      </div>
+      <div class="app-box" *ngIf="showApp()">
+        <h3>Bienvenue {{ currentUser }}</h3>
+        <button class="logout" (click)="logout()">Se déconnecter</button>
+      </div>
+      <!-- Message de confirmation -->
+      <div *ngIf="confirmation" class="confirmation-register">
+        {{ confirmation }}
+      </div>
+      <div *ngIf="showApp()">
+        <!-- contenu appli + projets -->
+        <h2>Liste des projets</h2>
+        <form (ngSubmit)="onSubmit()" #projectForm="ngForm">
+          <label>ID : </label>
+          <input type="text" name="id" [(ngModel)]="newProject.id" required>
+          <br>
+          <label>Description : </label>
+          <input type="text" name="desc" [(ngModel)]="newProject.desc" required>
+          <br>
+          <button type="submit" [disabled]="projectForm.invalid">Ajouter</button>
+        </form>
+        <hr>
+        <!-- pour debug -->
+        <!--<pre>{{ loading }} - {{ error }} - {{ items.length }}</pre>-->
+        <!-- Affiché tant que la requête est en cours -->
+        <div *ngIf="loading">
+          Chargement en cours...
+        </div>
+        <!-- Message si la liste est vide -->
+        <div *ngIf="!loading && items.length === 0">Aucun projet trouvé</div>
 
-    <!-- Affiché en cas d’erreur -->
-    <div *ngIf="error && !loading" style="color:red;">
-      Impossible de récupérer les données.
+        <!-- Affiché en cas d’erreur -->
+        <div *ngIf="error && !loading" style="color:red;">
+          Impossible de récupérer les données.
+        </div>
+        <!-- Affichage de la liste seulement si items n'est pas vide -->
+        <div class="project-list-container">
+          <ul *ngIf="!loading && !error">
+            <li *ngFor="let item of items">
+              <strong>ID interne:</strong> {{ item._id }} <br>
+              <strong>ID:</strong> {{ item.id }} <br>
+              <strong>Description:</strong> {{ item.desc }}
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <!-- Affichage de la liste seulement si items n'est pas vide -->
-    <ul *ngIf="!loading && !error">
-      <li *ngFor="let item of items">
-        <strong>ID interne:</strong> {{ item._id }} <br>
-        <strong>ID:</strong> {{ item.id }} <br>
-        <strong>Description:</strong> {{ item.desc }}
-      </li>
-    </ul>
+    <div class="CopyrightClass">
+      <p>Copyright © 2025 | <a href="#">Conditions d'utilisations</a></p>
+    </div>
   </div>
 </div>

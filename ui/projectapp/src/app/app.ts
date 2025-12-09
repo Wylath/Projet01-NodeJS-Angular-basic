@@ -37,13 +37,15 @@ export class App implements OnInit {
   confirmation = ''; // message de confirmation
 
   // Login/Register variables
-  loginEmail = "";
+  loginIdentifier = "";
   loginPassword = "";
 
   newUser = { username: "", email: "", password: "" };
 
   loggedIn = false;
   currentUser = "";
+
+  showRegisterForm = false; // contrôle affichage formulaire inscription
 
   constructor(private auth: AuthService, private projectManager: ProjectManager, private cdr: ChangeDetectorRef) {
     this.currentUser = this.auth.getUsername() || '';
@@ -102,12 +104,17 @@ export class App implements OnInit {
     });
   }
 
+  toggleRegisterForm(): void {
+    this.showRegisterForm = !this.showRegisterForm;
+    this.confirmation = '';
+  }
+
   //Login de l'user
   login(): void {
-    this.auth.login({ email: this.loginEmail, password: this.loginPassword }).subscribe({
+    this.auth.login({ identifier: this.loginIdentifier, password: this.loginPassword }).subscribe({
       next: () => {
         this.loggedIn = true;
-        this.currentUser = this.auth.getUsername() || this.loginEmail;
+        this.currentUser = this.auth.getUsername() || this.loginIdentifier;
         this.confirmation = 'Connecté !';
         this.loadProjects();
         setTimeout(() => { this.confirmation = ''; }, 3000);
@@ -126,6 +133,7 @@ export class App implements OnInit {
       next: () => {
         this.confirmation = 'Compte créé, connectez-vous.';
         this.newUser = { username: '', email: '', password: '' };
+        this.showRegisterForm = false; // retour automatique au login
         setTimeout(() => { this.confirmation = ''; }, 3000);
       },
      error: () => {
@@ -144,7 +152,11 @@ export class App implements OnInit {
 
   // Vérifie que l'user n'est pas connecté
   showLogin(): boolean {
-    return !this.auth.isAuthenticated();
+    return !this.auth.isAuthenticated() && !this.showRegisterForm;
+  }
+
+   showRegister(): boolean {
+    return !this.auth.isAuthenticated() && this.showRegisterForm;
   }
 
   // Vérifie que l'user est bien connecté

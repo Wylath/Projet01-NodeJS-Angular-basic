@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   // Login de l'utilisateur
-  login(payload: { email: string; password: string }): Observable<any> {
+  login(payload: { identifier: string; password: string }): Observable<any> {
     return this.http.post<{ token: string; username?: string }>(`${this.apiBase}/login`, payload)
       .pipe(
         tap(res => {

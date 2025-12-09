@@ -137,11 +137,16 @@ app.post('/api/auth/register', async (req, res) => {
 
 app.post('/api/auth/login', async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { identifier, password } = req.body;
         
         const db = client.db(DB_NAME);
 
-        const user = await db.collection(USERS).findOne({ email });
+         // Check si identifier est un email ou username
+        const query = identifier.includes('@') 
+            ? { email: identifier } 
+            : { username: identifier };
+
+        const user = await db.collection(USERS).findOne(query);
 
         if (!user) return res.status(404).send("User not found");
 

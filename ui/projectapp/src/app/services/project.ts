@@ -1,3 +1,19 @@
+/**
+ * ProjectManager Service
+ * 
+ * Service central pour gérer les projets dans l'application.
+ * 
+ * Fonctions principales :
+ * - getList(): récupère la liste des projets depuis l'API.
+ * - addProject(project): ajoute un nouveau projet via l'API.
+ * 
+ * Expose également l'interface Project pour typer les objets projet.
+ * 
+ * Utilisation :
+ *   this.projectManager.getList().subscribe(...);
+ *   this.projectManager.addProject({ id: '1', desc: 'Mon projet' }).subscribe(...);
+ */
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -6,6 +22,14 @@ export interface Project {
   _id: string;
   id: string;
   desc: string;
+}
+
+// Pas utilisé
+export interface User {
+  _id?: string;
+  username: string;
+  email: string;
+  password: string;  // hash en backend
 }
 
 @Injectable({

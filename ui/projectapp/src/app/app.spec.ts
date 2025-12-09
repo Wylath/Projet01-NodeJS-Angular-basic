@@ -1,3 +1,19 @@
+/**
+ * App Component Tests
+ * 
+ * Contient les tests unitaires pour le composant App.
+ * 
+ * Rôle :
+ * - Vérifie que le composant App peut être créé correctement.
+ * - Prépare le terrain pour tester les interactions avec AuthService et ProjectManager.
+ * 
+ * Exemple de test :
+ *   expect(component).toBeTruthy();
+ * 
+ * Utilisation :
+ *   ng test -- pour exécuter les tests unitaires
+ */
+
 import { TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { App } from './app';

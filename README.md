@@ -11,9 +11,11 @@ Application web sur une seule page pour :
 - Interface Angular simple et responsive.
 
 ## Structure
+```
 projet01/
-├── api/ # Backend Node.js + Express
+├── api/           # Backend Node.js + Express
 └── ui/projectapp/ # Frontend Angular
+```
 
 ## Prérequis
 - Node.js >= 18

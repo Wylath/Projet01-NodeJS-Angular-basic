@@ -15,8 +15,25 @@
  * - Ces ticks sont utilisés pour les champs created_at, updated_at et last_login_at
  *   afin d’assurer une cohérence et un format entier dans la base de données.
  */
-function nowTicks() {
-    return (Date.now() * 10000) + 621355968000000000;
+/**
+ * Retourne un timestamp "type Windows Ticks"
+ * 1 tick = 100 nanosecondes
+ * Base = 01/01/0001 (différente d'un timestamp Unix)
+ *
+ * Exemple d'utilisation :
+ *   const ticks = nowTicks();
+ */
+
+export function nowTicks() {
+  const unixMillis = Date.now();
+  const epochOffset = 62135596800000; // Différence entre Unix epoch et Windows epoch
+  return (unixMillis + epochOffset) * 10000;
 }
 
-module.exports = { nowTicks };
+/**
+ * Formatte une date lisible pour les logs
+ * Exemple : 2025-02-15 18:42:01
+ */
+export function formatDate(date = new Date()) {
+  return date.toISOString().replace("T", " ").substring(0, 19);
+}

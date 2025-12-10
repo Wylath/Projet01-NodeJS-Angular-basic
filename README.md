@@ -32,11 +32,13 @@ npm install
 Créer un fichier .env :
 ```ini
 JWT_SECRET=ton_secret
-MONGO_URI=mongodb://...
+JWT_EXPIRES=3600
+DB_NAME=projectperso
+MONGO_URI=mongodb+srv://utilisateur:motdepasse@cluster0.mongodb.net/?retryWrites=true&w=majority
 ```
 Lancer le serveur :
 ```bash
-node index.js
+node server.js
 ```
 Port par défaut : 5795.
 ### Frontend

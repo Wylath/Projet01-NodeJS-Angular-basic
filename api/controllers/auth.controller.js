@@ -1,3 +1,21 @@
+/**
+ * Contrôleur d’authentification
+ *
+ * Rôle :
+ * - Gérer les opérations liées aux utilisateurs :
+ *     • Inscription (register)
+ *     • Connexion (login)
+ * - Vérifier l’unicité de l’email avant création d’un compte.
+ * - Hasher les mots de passe avec bcrypt.
+ * - Vérifier les identifiants lors du login.
+ * - Générer un JWT en cas de connexion réussie.
+ * - Mettre à jour les informations de connexion de l’utilisateur.
+ *
+ * Contenu :
+ * - Accès à la base MongoDB via le client centralisé.
+ * - Outils de gestion du temps via nowTicks().
+ * - Fonctions exportées utilisées par les routes d’authentification.
+ */
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import client from '../db.js';

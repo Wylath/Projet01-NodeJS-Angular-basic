@@ -1,20 +1,20 @@
 /**
  * Serveur Node.js principal (Express + MongoDB)
- * 
+ *
  * Rôle :
- * - Configurer le serveur Express sur le port 5795
- * - Gérer les routes API pour le projet perso :
- *   - GET /api/projectperso/getlist : récupérer la liste des projets
- *   - POST /api/projectperso/add : ajouter un nouveau projet
- * - Connecter à MongoDB via MongoClient
- * - Configurer CORS pour permettre les requêtes depuis l'application Angular
- * - Logger les erreurs et succès pour faciliter le debug côté serveur
- * 
- * Structure :
- * - import des modules (express, mongodb, cors)
- * - middleware (express.json(), cors)
- * - routes API
- * - écoute du port
+ * - Initialiser l'application Express.
+ * - Charger la configuration CORS pour autoriser l'accès depuis Angular.
+ * - Activer le parsing JSON des requêtes.
+ * - Établir la connexion à MongoDB via le client centralisé.
+ * - Monter les routes :
+ *     • /api/projectperso → gestion des projets
+ *     • /api/auth         → authentification (login / register)
+ *
+ * Contenu :
+ * - Imports principaux (Express, CORS, MongoDB client).
+ * - Initialisation Express et middlewares.
+ * - Routing modulaire via les fichiers du dossier routes/.
+ * - Lancement du serveur sur le port 5795.
  */
 
 import express from "express";

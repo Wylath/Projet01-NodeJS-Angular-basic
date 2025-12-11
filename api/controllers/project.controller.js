@@ -1,3 +1,19 @@
+/**
+ * Contrôleur des projets
+ *
+ * Rôle :
+ * - Gérer l’accès aux données de la collection des projets.
+ * - Fournir :
+ *     • La liste complète des projets (getList)
+ *     • L’ajout d’un projet (addProject)
+ * - Valider les données reçues avant insertion.
+ * - Logger les opérations importantes ou les erreurs.
+ *
+ * Contenu :
+ * - Utilisation du client MongoDB centralisé.
+ * - Deux fonctions exportées pour les routes du module projectperso.
+ */
+
 import client from "../db.js";
 import logger from "../utils/logger.js";
 
